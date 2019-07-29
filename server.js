@@ -1,9 +1,16 @@
-var app = express();
-var PORT = process.env.PORT || 3000;
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+const htmlRoute = require('./app/routing/htmlRoute');
+const apiRoute = require('./app/routing/apiRoute')
+
+app.use('/', htmlRoute)
+app.use('./api', apiRoute)
 
 
 app.listen(PORT, function() {
