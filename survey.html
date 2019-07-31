@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css?family=Dosis:800&display=swap" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <title>Survey</title>
+</head>
+
+<body style="font-family: 'Dosis', sans-serif;">
+
+    <div class="container mt-5">
+        <div class="container" style="background-color:#EEE8AA">
+            <h1 class="display-4">Survey Questions</h1>
+            <hr class="my-4">
+        </div>
+
+        <h3><strong>About You</strong></h3>
+        <form>
+            <div class="form-group">
+                <label for="exampleinput">Name (Required)</label>
+                <input id="name" class="form-control" type="text" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="exampleinput">Link to Photo Image (Required)</label>
+                <input id="photo" class="form-control" type="text" placeholder="Photo Link">
+            </div>
+        </form>
+        <hr class="my-4">
+
+        <div class="container mb-4 mt-5" style="background-color:#FFE4E1; padding: 20px">
+            <h3><strong>Questions 1</strong></h3>
+            <p>Your mind is always buzzing with unexplored ideas and plans.</p>
+            <form class="form-inline mb-4" id="q1">
+                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                <option selected>Choose...</option>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+                </select>
+            </form>
+
+            <h3><strong>Questions 2</strong></h3>
+            <p>It is easy for you to get upset.</p>
+            <form class="form-inline mb-4" id="q2">
+                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                    <option selected>Choose...</option>
+                    <option value="1">1 (Strongly Disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (Strongly Agree)</option>
+                </select>
+            </form>
+
+            <h3><strong>Question 3</strong></h3>
+            <p>It's difficult for you to let people get emotionally close to you.</p>
+            <form class="form-inline mb-4" id="q3">
+                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                    <option selected>Choose...</option>
+                    <option value="1">1 (Strongly Disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (Strongly Agree)</option>
+                </select>
+            </form>
+
+            <h3><strong>Question 4</strong></h3>
+            <p>You prefer puzzels over musical instruments.</p>
+            <form class="form-inline mb-4" id="q4">
+                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                    <option selected>Choose...</option>
+                    <option value="1">1 (Strongly Disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (Strongly Agree)</option>
+                </select>
+            </form>
+
+            <h3><strong>Questions 5</strong></h3>
+            <p>You prefer a foreign vacation over a stay-cation.</p>
+            <form class="form-inline mb-4" id="q5">
+                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                    <option selected>Choose...</option>
+                    <option value="1">1 (Strongly Disagree)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (Strongly Agree)</option>
+                </select>
+            </form>
+            <button id="submit" type="submit" class="btn btn-dark my-1">Submit</button>
+        </div>
+
+        <!-- Modal -->
+        <div id="results-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" data-dismiss="modal">&times;</button>
+                        <h2 class="modal-title"><strong>Best Match</strong></h2>
+                    </div>
+                    <div class="modal-body">
+                        <h2 id="match-name"></h2>
+                        <img id="match-img"
+                            src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <script>
+        var config = {
+            ".chosen-select": {},
+            ".chosen-select-deselect": {
+                allow_single_deselect: true
+            },
+            ".chosen-select-no-single": {
+                disable_search_threshold: 10
+            },
+            ".chosen-select-no-results": {
+                no_results_text: "Oops, nothing found!"
+            },
+            ".chosen-select-width": {
+                width: "95%"
+            }
+        };
+
+        $("#submit").on("click", function (event) {
+            event.preventDefault();
+
+            function validateForm() {
+                var isValid = true;
+                $(".form-control").each(function () {
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
+                });
+
+                $(".chosen-select").each(function () {
+
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
+                });
+                return isValid;
+            }
+
+            if (validateForm()) {
+                // Create an object for the user"s data
+                var userData = {
+                    name: $("#name").val(),
+                    photo: $("#photo").val(),
+                    scores: [
+                        $("#q1").val(),
+                        $("#q2").val(),
+                        $("#q3").val(),
+                        $("#q4").val(),
+                        $("#q5").val(),
+                    ]
+                };
+                $.post("/api/friends", userData, function (data) {
+                    $("#match-naming").text(data.name);
+                    $("match-img").attr("src", data.photo);
+                    $("results-modal").modal("toggle");
+                });
+            } else {
+                alert("All fields are required");
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
