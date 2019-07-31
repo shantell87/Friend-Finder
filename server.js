@@ -38,7 +38,7 @@ var friends = [
         name:"Duke",
         photo:"https://image.shutterstock.com/image-photo/smart-casual-asian-man-using-260nw-610777475.jpg",
         scores:["5","1","4","3","1"]
-    },
+    }
 ];
 
 //html routes
